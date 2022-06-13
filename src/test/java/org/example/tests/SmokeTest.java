@@ -1,27 +1,28 @@
 package org.example.tests;
 
-import com.codeborne.selenide.WebDriverConditions;
 import io.qameta.allure.Description;
-import org.example.helpers.CDP;
 import org.example.helpers.DriverUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverConditions.title;
 import static com.codeborne.selenide.WebDriverConditions.url;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.example.tests.Location.MOSCOW;
 
-
+@Tag("Smoke")
 public class SmokeTest extends TestBase {
 
     public static final String EXPECTED_TITLE = "Wildberries – Интернет-магазин модной одежды и обуви";
@@ -41,7 +42,7 @@ public class SmokeTest extends TestBase {
     @DisplayName("Page title should have header text")
     void titleTest() {
         step("Page title should have text: " + EXPECTED_TITLE, () -> {
-            webdriver().shouldHave(WebDriverConditions.title(EXPECTED_TITLE));
+            webdriver().shouldHave(title(EXPECTED_TITLE), Duration.ofSeconds(10));
         });
     }
 
@@ -65,7 +66,7 @@ public class SmokeTest extends TestBase {
         });
 
         step("Check a relevant item is found", () -> {
-            $(".product-card__brand-name").shouldHave(text(ITEM_FOR_SEARCH));
+            $(".product-card-overflow").$(withText(ITEM_FOR_SEARCH)).shouldBe(visible);
         });
     }
 
@@ -123,10 +124,9 @@ public class SmokeTest extends TestBase {
         });
 
         step("Click 'Add to the basket' for the found item", () -> {
-            $(".product-card")
-                    .$(withText(ITEM_FOR_SEARCH))
-                    .hover()
+            $(".product-card-overflow").$(withText(ITEM_FOR_SEARCH))
                     .ancestor(".product-card")
+                    .hover()
                     .$(withText("В корзину"))
                     .click();
             $(".j-item-basket .navbar-pc__notify").shouldHave(text("1"));
@@ -163,10 +163,15 @@ public class SmokeTest extends TestBase {
     @DisplayName("Some delivery address can be selected")
     void checkDeliveryAddressSelection() {
         String[] pickPointAddress = new String[1];
+
         step("Header: Click on delivery address icon", () -> {
-            CDP.setGeolocationOverride(MOSCOW.latitude, MOSCOW.longitude);
             $(".j-geocity-wrap").click();
             $(".popup__header").shouldHave(text("Выберите адрес доставки"));
+        });
+
+        step("Select some pick-up point", () -> {
+            $("input[placeholder='Введите адрес']").setValue("Москва").pressEnter();
+            $$("#pooList .address-item__name").findBy(text("Москва")).shouldBe(visible);
             pickPointAddress[0] = $("#pooList .address-item__name").text().replaceAll("\n.*", "");
             $("#pooList .address-item__name").click();
             $(".balloon-content").$(withText("Выбрать")).click();
@@ -188,7 +193,7 @@ public class SmokeTest extends TestBase {
             webdriver().shouldHave(
                     url(BASE_URL + DELIVERY_ADDRESSES_URL));
             $("#terms-delivery").shouldHave(text("Информация о доставке и пунктах выдачи"));
-            $("#pooList .swiper-slide-active").shouldBe(visible);
+            $(".delivery-geo__wrap.j-big-address-map").shouldBe(visible);
         });
     }
 }
