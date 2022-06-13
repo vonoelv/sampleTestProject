@@ -1,7 +1,7 @@
 ## Проект по автоматизации тестирования интернет-магазина Wildberries
 > <a target="_blank" href="https://www.wildberries.ru/">Ссылка на главную страницу сайта</a>
 
-## :world_map: Содержание:
+## :page_facing_up: Содержание:
 - <a href="#computer-технологии-и-инструменты">Технологии и инструменты</a>
 - <a href="#black_nib-реализованные-проверки">Реализованные проверки</a>
 - <a href="#electric_plug-сборка-в-jenkins">Сборка в Jenkins</a>
