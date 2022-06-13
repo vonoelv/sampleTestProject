@@ -1,48 +1,26 @@
-# Проект по автоматизации тестирования интернет-магазина <a target="_blank" href="https://www.wildberries.ru/">Wildberries</a>
+## Проект по автоматизации тестирования интернет-магазина Wildberries
+> <a target="_blank" href="https://www.wildberries.ru/">Ссылка на главную страницу сайта</a>
 
-## :world_map:    Содержание
+## :world_map: Содержание:
+- <a href="#computer-технологии-и-инструменты">Технологии и инструменты</a>
+- <a href="#black_nib-реализованные-проверки">Реализованные проверки</a>
+- <a href="#electric_plug-сборка-в-jenkins">Сборка в Jenkins</a>
+- <a href="#arrow_forward-запуск-из-терминала">Запуск из терминала</a>
+- <a href="#open_book-allure-отчет">Allure отчет</a>
+- <a href="#-отчет-в-telegram">Отчет в Telegram</a>
+- <a href="#-видео-пример-прохождения-теста">Видео пример прохождения теста</a>
 
-➠ [Покрытый функционал](#black_nib-покрытый-функционал)
-
-➠ [Технологический стек](#floppy_disk-технологический-стек)
-
-➠ [Запуск тестов из терминала](#electron-запуск-тестов-из-терминала)
-
-➠ [Удаленный запуск тестов](#удаленный-запуск-тестов)
-
-➠ [Сборка в Jenkins](#-главная-страница-сборки-Jenkins)
-
-➠ [Отчет о результатах тестирования в Allure Report](#-отчет-о-результатах-тестирования-в-allure-report)
-
-➠ [Уведомления в Telegram с использованием бота](#-уведомления-в-telegram-с-использованием-бота)
-
-➠ [Пример запуска теста в Selenoid](#-пример-запуска-теста-в-selenoid)
-
-## <a name="black_nib-покрытый-функционал"></a>:black_nib: Покрытый функционал
-
-### UI
-
-- [x] Наличие заголовка на главной странице
-- [x] Проверка функциональности поисковой строки
-- [x] Проверка возможности открыть в каталоге категории различных уровней вложенности
-- [x] Проверка добавления товара в корзину
-- [x] Проверка выбора страны в заголовке страницы
-- [x] Проверка выбора адреса доставки в заголовке страницы
-- [x] Проверка возможности просмотреть список пунктов выдачи
-- [x] Проверка на наличие ошибок в console log
-
-## :floppy_disk: Технологический стек
-
+## :computer: Технологии и инструменты
 <p align="center">
 <img width="6%" title="IntelliJ IDEA" src="images/logo/Intelij_IDEA.svg">
 <img width="6%" title="Java" src="images/logo/Java.svg">
-<img width="6%" title="JUnit5" src="images/logo/JUnit5.svg">
 <img width="6%" title="Selenide" src="images/logo/Selenide.svg">
-<img width="6%" title="Gradle" src="images/logo/Gradle.svg">
-<img width="6%" title="GitHub" src="images/logo/GitHub.svg">
-<img width="6%" title="Jenkins" src="images/logo/Jenkins.svg">
 <img width="6%" title="Selenoid" src="images/logo/Selenoid.svg">
 <img width="6%" title="Allure Report" src="images/logo/Allure_Report.svg">
+<img width="6%" title="Gradle" src="images/logo/Gradle.svg">
+<img width="6%" title="JUnit5" src="images/logo/JUnit5.svg">
+<img width="6%" title="GitHub" src="images/logo/GitHub.svg">
+<img width="6%" title="Jenkins" src="images/logo/Jenkins.svg">
 <img width="6%" title="Telegram" src="images/logo/Telegram.svg">
 </p>
 
@@ -77,68 +55,68 @@
         note left of State9 : Уведомления
 ```
 
-## :electron: Запуск тестов из терминала
+## :black_nib: Реализованные проверки
+- Наличие заголовка на главной странице
+- Проверка функциональности поисковой строки
+- Проверка возможности открыть в каталоге категории различных уровней вложенности
+- Проверка добавления товара в корзину
+- Проверка выбора страны в заголовке страницы
+- Проверка выбора адреса доставки в заголовке страницы
+- Проверка возможности просмотреть список пунктов выдачи
+- Проверка на наличие ошибок в console log
 
-### Локальный запуск тестов
+## :electric_plug: Сборка в Jenkins
+### <a target="_blank" href="https://www.wildberries.ru/">Сборка в Jenkins</a>
+*Для запуска сборки необходимо указать значения параметров и нажать кнопку <code><strong>*Собрать с параметрами*</strong></code>.*
+<p align="center">
+<img title="Jenkins Dashboard" src="images/screenshots/Jenkins.png">
+</p>
 
+### Параметры сборки в Jenkins:
+Сборка в Jenkins
+- browser (браузер, по умолчанию chrome)
+- size (размер окна браузера, по умолчанию 1920x1080)
+- необходимо добавить файл resources/config/remote.properties (по примеру local.properties)
+
+## :arrow_forward: Запуск из терминала
+Локальный запуск:
 ```
 gradle clean test
 ```
 
-### Удаленный запуск тестов
-
+Удаленный запуск:
 ```
 clean
 test
--DdefaultBrowserSize=${BROWSER_SIZE}
--DdefaultBrowser=${BROWSER}
-
+-Dbrowser=${BROWSER}
+-Dsize=${BROWSER_SIZE}
 ```
 
-### Параметры сборки
-
-> <code>BROWSER</code> – браузер, в котором будут выполняться тесты (_по умолчанию - <code>chrome</code>_).
->
-> <code>BROWSER_SIZE</code> – размер окна браузера, в котором будут выполняться тесты (_по умолчанию - <code>1920x1080</code>_).
-
-## <img width="4%" title="Jenkins" src="images/logo/Jenkins.svg"> Главная страница сборки [Jenkins](https://jenkins.autotests.cloud/job/C12-vyach_son-hw13_sample_project/)
-
+## :open_book: Allure отчет
+- ### Главный экран отчета
 <p align="center">
-  <img src="images/screenshots/Jenkins.PNG">
+<img title="Allure Overview Dashboard" src="images/screenshots/allure_overview.png">
 </p>
 
-## <img width="4%" title="Allure Report" src="images/logo/Allure_Report.svg"> Отчет о результатах тестирования в [Allure Report](https://jenkins.autotests.cloud/job/C12-vyach_son-hw13_sample_project/6/allure/)
-
-### :shield: Главная страница Allure-отчета
-
+- ### Страница с проведенными тестами
 <p align="center">
-<img title="Allure Overview" src="images/screenshots/allure_overview.png">
+<img title="Allure Test Page" src="images/screenshots/allure_behaviors.png">
 </p>
 
-### :shield: Страница с тестами
-
+- ### Основной дашборд
 <p align="center">
-<img title="Allure Behaviors" src="images/screenshots/allure_behaviors.png">
-</p>
-
-### :shield: Основной дашборд
-
-<p align="center">
-<img title="Allure Overview Dashboard" src="images/screenshots/allure_overview_dashboard01.png">
+<img src="images/screenshots/allure_overview_dashboard01.png">
 <img src="images/screenshots/allure_overview_dashboard02.png">
 </p>
 
-## <img width="4%" title="Telegram" src="images/logo/Telegram.svg"> Уведомления в Telegram с использованием бота
+## <img width="4%" title="Telegram" src="images/logo/Telegram.svg"> Отчет в Telegram
 
 > После завершения сборки бот, созданный в <code>Telegram</code>, автоматически обрабатывает и отправляет сообщение с отчетом.
 <p align="center">
-<img title="Telegram Notifications" src="images/screenshots/telegram_notifications.png">
+<img title="Telegram notification message" src="images/screenshots/telegram_notifications.png" width="50%">
 </p>
 
-## <img width="4%" title="Selenoid" src="images/logo/Selenoid.svg"> Пример запуска теста в Selenoid
-
+## <img width="4%" title="Selenoid" src="images/logo/Selenoid.svg"> Видео пример прохождения теста
 > К каждому тесту в отчете прилагается видео. Одно из таких видео представлено ниже.
-
-<p align="center">
-<video width='100%' height='100%' controls autoplay><source src='images/gif/selenoid_video.mp4' type='video/mp4'></video>
-</p>
+>
+https://user-images.githubusercontent.com/103368614/173416855-a19498b8-752c-4e30-8a05-c5c5af154d8d.mp4
