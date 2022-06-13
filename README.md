@@ -112,27 +112,27 @@ test
 ### :shield: Главная страница Allure-отчета
 
 <p align="center">
-<img title="Allure Overview" src="images/screenshots/allure_overview.PNG">
+<img title="Allure Overview" src="images/screenshots/allure_overview.png">
 </p>
 
 ### :shield: Страница с тестами
 
 <p align="center">
-<img title="Allure Behaviors" src="images/screenshots/allure_behaviors.PNG">
+<img title="Allure Behaviors" src="images/screenshots/allure_behaviors.png">
 </p>
 
 ### :shield: Основной дашборд
 
 <p align="center">
-<img title="Allure Overview Dashboard" src="images/screenshots/allure_overview_dashboard01.PNG">
-<img src="images/screenshots/allure_overview_dashboard02.PNG">
+<img title="Allure Overview Dashboard" src="images/screenshots/allure_overview_dashboard01.png">
+<img src="images/screenshots/allure_overview_dashboard02.png">
 </p>
 
 ## <img width="4%" title="Telegram" src="images/logo/Telegram.svg"> Уведомления в Telegram с использованием бота
 
 > После завершения сборки бот, созданный в <code>Telegram</code>, автоматически обрабатывает и отправляет сообщение с отчетом.
 <p align="center">
-<img title="Telegram Notifications" src="images/screenshots/telegram_notifications.PNG">
+<img title="Telegram Notifications" src="images/screenshots/telegram_notifications.png">
 </p>
 
 ## <img width="4%" title="Selenoid" src="images/logo/Selenoid.svg"> Пример запуска теста в Selenoid
